@@ -11,6 +11,9 @@ import { UserProfileComponent } from './components/user-profile/user-profile.com
 import { UserEditComponent } from './components/user-edit/user-edit.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { ShardModule } from './shared/shard.module';
+import { ProductsModule } from './products/products.module';
+//import { HeaderComponent } from './shared/header/header.component';
 
 @NgModule({
   declarations: [
@@ -20,14 +23,19 @@ import { HttpClientModule } from '@angular/common/http';
        UserLoginComponent,
                 UserRegisterComponent,
                 UserProfileComponent,
-                UserEditComponent
+                UserEditComponent,
+            
+
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    ShardModule,
+    ProductsModule
+
   ],
   providers: [],
   bootstrap: [AppComponent]
