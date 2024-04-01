@@ -31,7 +31,7 @@ export class UserEditComponent {
 
   this.userEditForm=new FormGroup(
     {
-      userName: new FormControl('',[Validators.required,Validators.minLength(3),Validators.maxLength(50),Validators.pattern('^[A-Za-z\s]+$')]),
+      userName: new FormControl('',[Validators.required,Validators.minLength(3),Validators.maxLength(50),Validators.pattern('^[a-zA-Z\\s]+$')]),
       img:new FormControl('',[Validators.pattern('^(http(s?):\/\/)([^\s\/]+)(\/.+)(\.(jpg|jpeg|png|gif|bmp))$')])
     }
   );
@@ -58,7 +58,7 @@ export class UserEditComponent {
 fillForm(){
  this.httpOption.headers = this.httpOption.headers.set('useremail', sessionStorage.getItem("userEmail") as string);
 
- this.httpClient.get<ApiResponse>('http://localhost:3005/api/v1/profile',this.httpOption).subscribe(
+ this.httpClient.get<ApiResponse>('http://localhost:3000/api/v1/profile',this.httpOption).subscribe(
    response => {
      console.log('Response:', response);
      if(response.message){
@@ -93,7 +93,7 @@ submit(){
  
  
                                                                          //request body
- this.httpClient.patch<ApiResponse>('http://localhost:3005/api/v1/profile',editUser).subscribe(
+ this.httpClient.patch<ApiResponse>('http://localhost:3000/api/v1/profile',editUser).subscribe(
      response => {
        console.log('Response:', response);
          //alert(response.message);
@@ -111,12 +111,14 @@ showAlert(message: string) {
  if (this.alertDiv && this.alertParagraph) {
      this.alertParagraph.nativeElement.textContent = message;
      this.alertDiv.nativeElement.style.display="block";
+     setTimeout(()=>{
+      if(this.alertDiv)
+      {
+        this.alertDiv.nativeElement.style.display="none";
+      }
+    },3000);
  }
 }
 
-dismissFun(){
- if (this.alertDiv) {
-   this.alertDiv.nativeElement.style.display="none";
-}
-}
+//https://img.freepik.com/free-photo/confident-cheerful-young-businesswoman_1262-20881.jpg
 }

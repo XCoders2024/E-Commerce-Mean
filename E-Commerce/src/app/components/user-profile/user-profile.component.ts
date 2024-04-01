@@ -26,7 +26,7 @@ export class UserProfileComponent {
     //very important : this is the correct way to send data in the header
     this.httpOption.headers = this.httpOption.headers.set('useremail', sessionStorage.getItem("userEmail") as string);
 
-    this.httpClient.get<ApiResponse>('http://localhost:3005/api/v1/profile',this.httpOption).subscribe(
+    this.httpClient.get<ApiResponse>('http://localhost:3000/api/v1/profile',this.httpOption).subscribe(
       response => {
         console.log('Response:', response);
         if(response.message){

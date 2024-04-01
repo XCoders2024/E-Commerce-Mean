@@ -11,6 +11,7 @@ import { UserProfileComponent } from './components/user-profile/user-profile.com
 import { UserEditComponent } from './components/user-edit/user-edit.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { UserLogoutComponent } from './components/user-logout/user-logout.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { HttpClientModule } from '@angular/common/http';
        UserLoginComponent,
                 UserRegisterComponent,
                 UserProfileComponent,
-                UserEditComponent
+                UserEditComponent,
+                UserLogoutComponent
   ],
   imports: [
     BrowserModule,

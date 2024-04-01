@@ -55,7 +55,7 @@ let User:IUser = this.userRegisterForm.value as IUser;       //user is the objec
 //call api 
                     //ApiResponse is an interface which i made to can access response.message
                     //to make the typescript understand that the return of httpClient.post is an object has message field 
-this.httpClient.post<ApiResponse>('http://localhost:3005/api/v1/register', User)
+this.httpClient.post<ApiResponse>('http://localhost:3000/api/v1/register', User)
   .subscribe(
     response => {
       console.log('Response:', response);
@@ -77,14 +77,16 @@ showAlert(message: string) {
 if (this.alertDiv && this.alertParagraph) {
     this.alertParagraph.nativeElement.textContent = message;
     this.alertDiv.nativeElement.style.display="block";
+    setTimeout(()=>{
+      if(this.alertDiv)
+      {
+        this.alertDiv.nativeElement.style.display="none";
+      }
+    },3000);
 }
 }
 
-dismissFun(){
-if (this.alertDiv) {
-  this.alertDiv.nativeElement.style.display="none";
-}
-}
+
 
 
 //don't forget to run the node project to can send requests

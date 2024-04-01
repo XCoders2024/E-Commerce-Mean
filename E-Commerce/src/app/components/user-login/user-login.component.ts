@@ -3,6 +3,7 @@ import { Component, ElementRef, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { IUser } from '../../models/iuser';
 import { ApiResponse } from '../../models/api-response';
+import { HandleNavBarService } from '../../services/handle-nav-bar.service';
 
 @Component({
   selector: 'app-user-login',
@@ -15,7 +16,7 @@ export class UserLoginComponent {
   @ViewChild('alertDiv') alertDiv?:ElementRef;
   @ViewChild('alertParagraph') alertParagraph?:ElementRef;
 
-  constructor(private httpClient:HttpClient){
+  constructor(private httpClient:HttpClient,private handleNavBarService:HandleNavBarService){
     this.httpOption={
       headers:new HttpHeaders({
         'Content-Type':'application/json'
@@ -30,6 +31,9 @@ export class UserLoginComponent {
                  
      }
    );
+
+
+   
   }
 
 
@@ -50,7 +54,7 @@ export class UserLoginComponent {
   
 
     //call api 
-    this.httpClient.post<ApiResponse>('http://localhost:3005/api/v1/login', UserLogin)
+    this.httpClient.post<ApiResponse>('http://localhost:3000/api/v1/login', UserLogin)
     .subscribe(
       response => {
         console.log('Response:', response);
@@ -59,6 +63,8 @@ export class UserLoginComponent {
          if(response.token){
           sessionStorage.setItem("token", response.token);
           sessionStorage.setItem("userEmail", response.userEmail);
+          
+          this.handleNavBarService.isLoggedSubject.next(true);
          }
       },
       error => {
@@ -74,12 +80,14 @@ showAlert(message: string) {
   if (this.alertDiv && this.alertParagraph) {
       this.alertParagraph.nativeElement.textContent = message;
       this.alertDiv.nativeElement.style.display="block";
+      setTimeout(()=>{
+        if(this.alertDiv)
+        {
+          this.alertDiv.nativeElement.style.display="none";
+        }
+      },3000);
   }
 }
 
-dismissFun(){
-  if (this.alertDiv) {
-    this.alertDiv.nativeElement.style.display="none";
-}
-}
+
 }
