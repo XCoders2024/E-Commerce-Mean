@@ -12,6 +12,9 @@ import { UserEditComponent } from './components/user-edit/user-edit.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { UserLogoutComponent } from './components/user-logout/user-logout.component';
+import { ShardModule } from './shared/shard.module';
+import { ProductsModule } from './products/products.module';
+//import { HeaderComponent } from './shared/header/header.component';
 
 @NgModule({
   declarations: [
@@ -23,13 +26,19 @@ import { UserLogoutComponent } from './components/user-logout/user-logout.compon
                 UserProfileComponent,
                 UserEditComponent,
                 UserLogoutComponent
+                UserEditComponent,
+            
+
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    ShardModule,
+    ProductsModule
+
   ],
   providers: [],
   bootstrap: [AppComponent]
